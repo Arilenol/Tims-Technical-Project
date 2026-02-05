@@ -51,7 +51,7 @@ public class TestAlgorithm {
 	}
 	
 	@Test
-	public void testQuickSort2() {
+	public void testInPlaceQuickSort() {
         List<Integer> test = List.of(9, 2, 1, 9, 19, 12, 23, 11, 2);
         
         List<Integer> testB = new ArrayList<>();
