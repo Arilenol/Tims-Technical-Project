@@ -6,10 +6,8 @@ import java.util.List;
 
 public class Algorithm {
 
-	/**
-	 * Private constructor to prevent instantiation.
-	 */
 	private Algorithm() {
+		// Private constructor to prevent instantiation.
 	}
 
 	/**
@@ -25,11 +23,11 @@ public class Algorithm {
 	 * <p>
 	 * The method pauses for 300 milliseconds between each output.
 	 *
-	 * @param x the starting number
+	 * @param start the starting number
 	 */
-	public static void fizzBuzz(int x) {
+	public static void fizzBuzz(int start) {
 		boolean passed = false;
-		for (int i = 1;; i++) {
+		for (int i = start;; i++) {
 			if (i % 3 == 0) {
 				System.out.print("Fizz");
 				passed = true;
@@ -39,14 +37,14 @@ public class Algorithm {
 				passed = true;
 			}
 			if (!passed) {
-				System.out.println(x);
+				System.out.println(i);
 			} else {
 				System.out.println();
 			}
-			x++;
 			passed = false;
+			// This is not part of the exercise, but to see the results properly
 			try {
-				Thread.sleep(300);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				Thread.currentThread().interrupt();
@@ -58,16 +56,28 @@ public class Algorithm {
 	 * Checks whether a given string is a palindrome.
 	 * <p>
 	 * The method ignores non-alphanumeric characters and is case-insensitive.
+	 * </p>
 	 *
 	 * @param word the string to check
 	 * @return {@code true} if the string is a palindrome, {@code false} otherwise
 	 */
 	public static boolean isPalindrom(String word) {
-		String cleanWord = word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-		StringBuilder sb = new StringBuilder(cleanWord);
-		return (sb.reverse().toString().equals(cleanWord));
+		boolean result = false;
+		if (word != null) {
+			String cleanWord = word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+			StringBuilder sb = new StringBuilder(cleanWord);
+			result = sb.reverse().toString().equals(cleanWord);
+		}
+		return result;
 	}
 
+	/**
+	 * Sorts a list of integers using the QuickSort algorithm.
+	 *
+	 * @param sequences the list of integers to be sorted
+	 * @return a new list containing the sorted integers; returns an empty list if
+	 *         {@code sequences} is {@code null}
+	 */
 	public static List<Integer> quickSort(List<Integer> sequences) {
 		if (sequences == null) {
 			return Collections.emptyList();
@@ -81,7 +91,7 @@ public class Algorithm {
 		// Choose a pivot
 		Integer pivot = sequences.get(len - 1);
 		sequences.remove(len - 1);
-		//Split the list into: Left: elements ≤ pivot Right: elements > pivot
+		// Split the list into: Left: elements ≤ pivot Right: elements > pivot
 		List<Integer> leftArray = new ArrayList<>();
 		List<Integer> rightArray = new ArrayList<>();
 
@@ -95,7 +105,7 @@ public class Algorithm {
 
 		List<Integer> result = new ArrayList<>();
 		result.addAll(quickSort(leftArray));
-		result.add(pivot); 
+		result.add(pivot);
 		result.addAll(quickSort(rightArray));
 		return result;
 
@@ -103,41 +113,15 @@ public class Algorithm {
 
 	/**
 	 * Performs an in-place QuickSort on the given list of integers.
-	 *
+	 * 
 	 * @param sequences the list of integers to sort
 	 */
 	public static void inPlaceQuickSort(List<Integer> sequences) {
-		if (sequences == null) {
-			return ;
+		if (sequences != null) {
+			List<Integer> sortedArray = quickSort(sequences);
+			sequences.clear();
+			sequences.addAll(sortedArray);
 		}
-		int len = sequences.size();
-		if (len == 0 || len == 1) {
-			// it’s already sorted.
-			return ;
-		}
-
-		// Choose a pivot
-		Integer pivot = sequences.get(len - 1);
-		sequences.remove(len - 1);
-		//Split the list into: Left: elements ≤ pivot Right: elements > pivot
-		List<Integer> leftArray = new ArrayList<>();
-		List<Integer> rightArray = new ArrayList<>();
-
-		sequences.forEach(element -> {
-			if (element > pivot) {
-				rightArray.add(element);
-			} else {
-				leftArray.add(element);
-			}
-		});
-
-		List<Integer> result = new ArrayList<>();
-		result.addAll(quickSort(leftArray));
-		result.add(pivot); 
-		result.addAll(quickSort(rightArray));
-
-		sequences.clear();
-		sequences.addAll(result);
 	}
 
 }
