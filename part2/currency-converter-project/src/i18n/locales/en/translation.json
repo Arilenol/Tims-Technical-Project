@@ -1,0 +1,13 @@
+{
+  "header" :{
+    "welcome": "Welcome to our online currency converter",
+    "home": "Home",
+    "langChoice": "Choose the language : ",
+    "about" : "About"
+  },
+  "converter":{
+    "amout": "Amout",
+    "to": "To",
+    "title": "You are converting from {{valueFrom}} to {{valueTo}}"
+  }
+}

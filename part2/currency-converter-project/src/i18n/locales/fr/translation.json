@@ -1,0 +1,13 @@
+{
+  "header": {
+    "welcome": "Bienvenue sur notre convertisseur de monnaie en ligne",
+    "home": "Accueil",
+    "langChoice": "Choisissez la langue : ",
+    "about": "À propos"
+  },
+  "converter": {
+    "amout": "Montant",
+    "to": "Vers",
+    "title" : "Vous convertissez de {{valueFrom}} à {{valueTo}}"
+  }
+}
