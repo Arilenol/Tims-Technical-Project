@@ -1,44 +1,77 @@
-import { useState } from 'react'
-import type { RatesData } from '../models/RatesData'
+import { useEffect, useState } from 'react'
 import '/src/assets/styles/currencyConverter.css'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import currencies from '../models/currencies'
+import { getExchangeRates } from '../services/api/currency'
+import type { DataStored } from '../models/DataStored'
 
 export default function CurrencyConverter () {
-  const { t, i18n } = useTranslation()
-  const data = localStorage.getItem('rates')
-  if (!data) {
-    return <p>Aucun taux disponible pour le moment</p>
-  }
-  const rates: RatesData = JSON.parse(data)
-  const [typeRate, setTypeRate] = useState(Object.keys(rates.rates)[0])
-  const [typeRateBis, setTypeRateBis] = useState(Object.keys(rates.rates)[1])
+  const { t } = useTranslation()
+  const data = currencies
+
+  const [codeCurrencyFrom, setCodeCurrencyFrom] = useState(data[0])
+  const [codeCurrencyTo, setCodeCurrencyTo] = useState(data[1])
+  const [amount, setAmount] = useState<number>(0)
+  const [result, setResult] = useState<number>(0)
 
   function handleChangeBis (e: React.ChangeEvent<HTMLSelectElement>): void {
-    setTypeRateBis(e.target.value)
+    setCodeCurrencyTo(e.target.value)
   }
 
   function handleChange (e: React.ChangeEvent<HTMLSelectElement>): void {
-    setTypeRate(e.target.value)
+    setCodeCurrencyFrom(e.target.value)
   }
 
-  function convert (): void {}
+  async function convert (): Promise<void> {
+    let exchangeRates: DataStored
+    let data = localStorage.getItem(codeCurrencyFrom)
+
+    if (!data) {
+      const result = await getExchangeRates(codeCurrencyFrom)
+      exchangeRates = result
+    } else {
+      exchangeRates = JSON.parse(data)
+      if (Date.now() < exchangeRates.timestamp) {
+        const result = await getExchangeRates(codeCurrencyFrom)
+        exchangeRates = result
+      }
+      const rate = exchangeRates.rates[codeCurrencyTo]
+      const conversionResult = amount * rate
+      setResult(conversionResult)
+    }
+  }
+
+  useEffect(() => {
+    convert()
+  }, [amount, codeCurrencyFrom, codeCurrencyTo])
 
   function save (): void {}
 
   return (
     <div className='converter'>
       <p>
-        {t('converter.title', { valueFrom: typeRate, valueTo: typeRateBis })}
+        {t('converter.title', {
+          valueFrom: codeCurrencyFrom,
+          valueTo: codeCurrencyTo
+        })}
       </p>
       <div className='converterFrom'>
         <label className='labelTitle'>{t('converter.amout')}</label>
         <div className='converterContainer'>
-          <input type='number' />
-          <select id='inputFrom' value={typeRate} onChange={handleChange}>
-            {Object.entries(rates.rates).map(([currency]) => (
-              <option key={currency} value={currency}>
-                {currency}
+          <input
+            defaultValue={amount}
+            id='numberEntered'
+            type='number'
+            onChange={e => setAmount(Number(e.target.value))}
+          />
+          <select
+            id='inputFrom'
+            value={codeCurrencyFrom}
+            onChange={handleChange}
+          >
+            {data.map(codeCurrency => (
+              <option key={codeCurrency} value={codeCurrency}>
+                {codeCurrency} : {t(`converter.currencies.${codeCurrency}`)}
               </option>
             ))}
           </select>
@@ -47,18 +80,23 @@ export default function CurrencyConverter () {
       <div className='converterTo'>
         <label className='labelTitle'>{t('converter.to')}</label>
         <div className='converterContainer'>
-          <input type='number' />
-          <select id='inputTo' value={typeRateBis} onChange={handleChangeBis}>
-            {Object.entries(rates.rates).map(([currency]) => (
-              <option key={currency} value={currency}>
-                {currency}
+          <input value={result} id='result' type='number' disabled />
+          <select
+            id='inputTo'
+            value={codeCurrencyTo}
+            onChange={handleChangeBis}
+          >
+            {data.map(codeCurrency => (
+              <option key={codeCurrency} value={codeCurrency}>
+                {codeCurrency} : {t(`converter.currencies.${codeCurrency}`)}
               </option>
             ))}
           </select>
         </div>
       </div>
-      <button className='converter-btn' onClick={convert}>Convertir</button>
-      <button className='converter-btn' onClick={save}>Sauvegarder mes choix de convertion</button>
+      <button className='converter-btn' onClick={save}>
+        {t('converter.saveConvert')}
+      </button>
     </div>
   )
 }
