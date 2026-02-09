@@ -13,6 +13,10 @@ export async function getExchangeRates(code: string): Promise<DataStored> {
   }
 
   const data: RatesData = await res.json()
+  if (data.result === "error") {
+    throw new Error("Error API");
+
+  }
   const rates = data.conversion_rates
 
   const expiration = Date.now() + 30 * 60 * 1000
