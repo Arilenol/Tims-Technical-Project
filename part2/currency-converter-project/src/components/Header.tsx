@@ -7,11 +7,8 @@ export default function Header () {
 
   const availableLanguages = ['fr', 'en']
 
-  function handleChange () {
-    const sel = document.getElementById('selectLang') as HTMLSelectElement
-    if (sel) {
-      i18n.changeLanguage(sel.value)
-    }
+  function handleChange (e: React.ChangeEvent<HTMLSelectElement>) {
+    i18n.changeLanguage(e.target.value)
   }
 
   return (
@@ -19,6 +16,9 @@ export default function Header () {
       <div className='actionHeader'>
         <Link to='/' className='header-btn'>
           {t('header.home')}
+        </Link>
+        <Link to='/history' className='header-btn'>
+          {t('header.history')}
         </Link>
         <Link to='/about' className='header-btn'>
           {t('header.about')}

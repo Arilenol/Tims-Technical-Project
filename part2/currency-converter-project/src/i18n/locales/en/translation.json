@@ -3,10 +3,12 @@
     "welcome": "Welcome to our online currency converter",
     "home": "Home",
     "langChoice": "Choose the language : ",
-    "about": "About"
+    "about": "About",
+    "history": "History"
   },
   "history": {
-    "title": "Your history"
+    "title": "Your history",
+    "load": "Load this data"
   },
   "converter": {
     "amout": "Amout",
@@ -15,6 +17,7 @@
     "convert": "Convert",
     "saveConvert": "Save my conversion choices",
     "accuracy": "Max conversion accuracy",
+    "reverse": "reverse the currencies",
     "currencies": {
       "USD": "United States Dollar",
       "AED": "United Arab Emirates Dirham",

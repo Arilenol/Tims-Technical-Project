@@ -75,6 +75,11 @@
   cursor: pointer;
 }
 
+.reverseCode{
+  margin: auto;
+  width: 100px;
+}
+
 .converter button:hover {
   background-color: rgb(30, 66, 132);
 }

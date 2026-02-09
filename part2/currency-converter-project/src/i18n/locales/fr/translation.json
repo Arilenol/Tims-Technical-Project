@@ -3,10 +3,12 @@
     "welcome": "Bienvenue sur notre convertisseur de monnaie en ligne",
     "home": "Accueil",
     "langChoice": "Choisissez la langue : ",
-    "about": "À propos"
+    "about": "À propos",
+    "history": "Historique"
   },
   "history": {
-    "title": "Votre historique"
+    "title": "Votre historique",
+    "load": "Charger cette donnée"
   },
   "converter": {
     "amout": "Montant",
@@ -15,6 +17,7 @@
     "convert": "Convertir",
     "saveConvert": "Sauvegarder mes choix de conversion",
     "accuracy": "Précision de la conversion au maximum",
+    "reverse": "inverser les monnaies",
     "currencies": {
       "USD": "Dollar américain",
       "AED": "Dirham des Émirats arabes unis",

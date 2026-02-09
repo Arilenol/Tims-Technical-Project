@@ -1,0 +1,67 @@
+.history {
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #f9fafb;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 500px;
+}
+
+.history h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.history > .historyItem {
+  position: relative;
+  background: white;
+  padding: 1.25rem;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.history p {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+.history > .historyItem {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.loadData {
+  position: absolute;
+  font-size: small;
+  right: 5px;
+  bottom: 5px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 6px;
+  transition: 0.3s all ease-in-out;
+}
+
+.loadData:hover {
+  background-color: #2980b9;
+}
+
+
+@media (max-width: 525px) {
+    .historyItem{
+        height: 100px;
+    }
+}
+
+@media (max-width: 300px){
+    .historyItem{
+        height: 125px;
+    }
+    .loadData{
+        left: 1% ;
+    }
+}
