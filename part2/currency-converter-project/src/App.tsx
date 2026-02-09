@@ -3,6 +3,7 @@ import Home from './views/Home'
 import Header from './components/Header'
 import "/src/App.css"
 import About from './views/About'
+import History from './views/History'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
+          <Route path='/history' element={<History />} />
           <Route path='*' element={<Home />} />
         </Routes>
       </main>

@@ -1,4 +1,4 @@
 export interface DataStored {
   timestamp: number
-  rates: any
+  rates: Record<string, number>
 }

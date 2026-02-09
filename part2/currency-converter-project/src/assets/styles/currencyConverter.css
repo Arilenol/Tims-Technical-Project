@@ -12,7 +12,8 @@
 }
 
 .converterFrom,
-.converterTo {
+.converterTo,
+.converterAccuracy {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -38,6 +39,10 @@
   transition: 0.2s ease-in-out;
 }
 
+.converterAccuracy .converterContainer select {
+  flex: 1;
+}
+
 .converterContainer select {
   width: 90px;
   padding: 0.75rem 0.6rem;
@@ -53,7 +58,7 @@
 .converterContainer select:focus {
   outline: none;
   border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
+  box-shadow: 0 0 0 2px rgba(238, 248, 255, 0.15);
 }
 
 .converterContainer select:hover {
