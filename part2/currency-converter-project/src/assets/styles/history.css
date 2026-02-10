@@ -51,19 +51,9 @@
   flex-direction: column;
 }
 
-.clearHistory {
-  font-size: small;
-  background-color: #db344a;
-  color: white;
-  text-decoration: none;
-  padding: 5px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 6px;
-  transition: 0.3s all ease-in-out;
-}
-
+.clearHistory,
 .clearHistoryIn {
+  cursor: pointer;
   font-size: small;
   background-color: #db344a;
   color: white;
@@ -81,13 +71,17 @@
   margin-top: 20px;
 }
 
+.saved {
+  color: green;
+}
+
 @media (max-width: 525px) {
   .historyItem {
     height: 100px;
   }
 }
 
-@media (max-width: 325px) {
+@media (max-width: 430px) {
   .historyItem {
     height: 125px;
   }

@@ -41,7 +41,9 @@ function History() {
     <div className='history'>
       <div className='headerHistory'>
         <h1>{t('history.title')}</h1>
-        <button onClick={clearAll} className='clearHistory'>{t("history.clear")}</button>
+        {Object.keys(history).length === 0 ? <label className='labelTitle'>{t("history.empty")}</label> :
+          <button onClick={clearAll} className='clearHistory'>{t("history.clear")}</button>
+        }
       </div>
       {Object.entries(history).map(([id, item]) => (
         <div key={id} className='historyItem'>

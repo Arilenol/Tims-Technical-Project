@@ -32,7 +32,7 @@ export default function CurrencyConverter() {
   const [result, setResult] = useState<number>(
     itemPreSave ? itemPreSave.result : 0
   )
-
+  const [saved, setSaved] = useState<boolean>(false)
   /**
    * Updates the target currency code when the select input changes
    * 
@@ -103,6 +103,8 @@ export default function CurrencyConverter() {
    */
   function save(): void {
     const historyStored = localStorage.getItem('history')
+    // print success message during 3 seconds 
+    setSaved(true)
 
     const history: TypeHistory = historyStored ? JSON.parse(historyStored) : {}
 
@@ -117,6 +119,9 @@ export default function CurrencyConverter() {
       date: Date.now()
     }
     localStorage.setItem('history', JSON.stringify(history))
+    setTimeout(() => {
+      setSaved(false)
+    }, 3000)
   }
 
   return (
@@ -128,6 +133,7 @@ export default function CurrencyConverter() {
             valueTo: codeCurrencyTo
           })}
         </p>
+        {saved && <p className='saved'>{t("popup.message")}</p>}
 
         <label className='labelTitle'>{t('converter.accuracy')}</label>
         <div className='converterContainer'>

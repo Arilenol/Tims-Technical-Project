@@ -8,9 +8,13 @@
   },
   "history": {
     "title": "Votre historique",
+    "empty": "Ton historique est vide",
     "clear": "Vider l'historique",
     "load": "Charger cette donnée",
     "delete": "Supprimer cette donnée"
+  },
+  "popup": {
+    "message": "Votre conversation a bien été sauvegardé"
   },
   "about": {
     "title": "À propos du Currency Converter",
