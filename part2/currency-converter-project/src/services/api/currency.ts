@@ -30,6 +30,7 @@ export async function getExchangeRates(code: string): Promise<DataStored> {
   // Calcul the expiration to have TTL (TimeToLive) of 30 minutes 
   const expiration = Date.now() + 30 * 60 * 1000
   const result = {
+    timestampFetch: Date.now(),
     timestamp: expiration,
     rates
   }

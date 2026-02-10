@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import '/src/assets/styles/currencyConverter.css'
 import { useTranslation } from 'react-i18next'
+import i18n from '../i18n/i18nLoader'
 import currencies from '../models/currencies'
 import { getExchangeRates } from '../services/api/currency'
 import type { DataStored } from '../models/DataStored'
@@ -11,20 +12,24 @@ export default function CurrencyConverter() {
   const { t } = useTranslation()
   const location = useLocation()
   //Fecth all the Code currencies available to convert from currencies.tsx
-  const data: string[] = currencies
+  const data: Record<string,string> = currencies
 
   const accuracyNumbers: number[] = [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
   const [accuracy, setAccuracy] = useState(0.01)
+  
+  // Hooks for the header of the converter to have more information about the conversion
+  const [rate, setRate] = useState<number>(-1)
+  const [date, setDate] = useState<number>()
 
   //If we are coming from history, this command is used to pre-load the data fields
   const itemPreSave = location.state ? location.state.item : null
 
   // All the hooks are declared to have their states
   const [codeCurrencyFrom, setCodeCurrencyFrom] = useState(
-    itemPreSave ? itemPreSave.codeFrom : data[0]
+    itemPreSave ? itemPreSave.codeFrom : Object.keys(data).at(0)
   )
   const [codeCurrencyTo, setCodeCurrencyTo] = useState(
-    itemPreSave ? itemPreSave.codeTo : data[1]
+    itemPreSave ? itemPreSave.codeTo : Object.keys(data).at(45)
   )
   const [amount, setAmount] = useState<number>(
     itemPreSave ? itemPreSave.amount : 0
@@ -69,6 +74,8 @@ export default function CurrencyConverter() {
       }
 
       const rate = exchangeRates.rates[codeCurrencyTo]
+      setRate(rate)
+      setDate(exchangeRates.timestampFetch)
 
       // To have the accuracy asked by the user we need to have the lenght of his selection
       const cleanAccuracy = String(accuracy).replace('.', '').length - 1
@@ -133,9 +140,11 @@ export default function CurrencyConverter() {
             valueTo: codeCurrencyTo
           })}
         </p>
+        <p className='rate'>1 {data[codeCurrencyFrom]} = {rate} {data[codeCurrencyTo]}</p>
+        {date && <p className='rate'>{t("converter.date")} {new Date(date).toLocaleString(i18n.language)}</p>}
         {saved && <p className='saved'>{t("popup.message")}</p>}
 
-        <label className='labelTitle'>{t('converter.accuracy')}</label>
+        <p className='labelTitle'>{t('converter.accuracy')}</p>
         <div className='converterContainer'>
           <select
             defaultValue={accuracy}
@@ -151,20 +160,19 @@ export default function CurrencyConverter() {
       </div>
 
       <div className='converterFrom'>
-        <label className='labelTitle'>{t('converter.amout')}</label>
+        <p className='labelTitle'>{t('converter.amout')}</p>
         <div className='converterContainer'>
-          <input
-            defaultValue={amount}
-            id='numberEntered'
+          <input defaultValue={amount} id='numberEntered'
             type='number'
             onChange={e => setAmount(Number(e.target.value))}
           />
+          <p className='symbol'>{data[codeCurrencyFrom]}</p>
           <select
             id='inputFrom'
             value={codeCurrencyFrom}
             onChange={handleChange}
           >
-            {data.map(codeCurrency => (
+            {Object.keys(data).map(codeCurrency => (
               <option key={codeCurrency} value={codeCurrency}>
                 {codeCurrency} : {t(`converter.currencies.${codeCurrency}`)}
               </option>
@@ -190,15 +198,16 @@ export default function CurrencyConverter() {
         </svg>
       </button>
       <div className='converterTo'>
-        <label className='labelTitle'>{t('converter.to')}</label>
+        <p className='labelTitle'>{t('converter.to')}</p>
         <div className='converterContainer'>
           <input value={result} id='result' type='number' disabled />
+          <p className='symbol'>{data[codeCurrencyTo]}</p>
           <select
             id='inputTo'
             value={codeCurrencyTo}
             onChange={handleChange}
           >
-            {data.map(codeCurrency => (
+            {Object.keys(data).map(codeCurrency => (
               <option key={codeCurrency} value={codeCurrency}>
                 {codeCurrency} : {t(`converter.currencies.${codeCurrency}`)}
               </option>

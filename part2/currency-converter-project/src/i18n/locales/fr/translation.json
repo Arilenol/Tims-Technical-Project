@@ -42,6 +42,7 @@
     "saveConvert": "Sauvegarder mes choix de conversion",
     "accuracy": "Précision de la conversion au maximum",
     "reverse": "inverser les monnaies",
+    "date": "Taux interbancaire : ",
     "currencies": {
       "USD": "Dollar américain",
       "AED": "Dirham des Émirats arabes unis",

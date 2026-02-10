@@ -20,12 +20,24 @@
 }
 
 .labelTitle {
+  margin: 0;
+  padding: 0;
   font-size: 0.9rem;
   font-weight: 600;
   color: #2c3e50;
 }
 
+.rate{
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.rate:nth-child(3){
+  padding-bottom: 15px;
+}
+
 .converterContainer {
+  position: relative;
   display: flex;
   gap: 0.5rem;
 }
@@ -75,7 +87,7 @@
   cursor: pointer;
 }
 
-.reverseCode{
+.reverseCode {
   margin: auto;
   width: 100px;
 }
@@ -84,6 +96,12 @@
   background-color: rgb(30, 66, 132);
 }
 
+.symbol {
+  position: absolute;
+  font-size: x-large;
+  bottom: -15px;
+  right: 115px;
+}
 
 @media (max-width: 480px) {
   .converter {
@@ -96,5 +114,10 @@
 
   .converterContainer select {
     width: 100%;
+  }
+
+  .symbol {
+    top: -15px;
+    right: 15px;
   }
 }

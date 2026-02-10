@@ -42,6 +42,7 @@
     "saveConvert": "Save my conversion choices",
     "accuracy": "Max conversion accuracy",
     "reverse": "reverse the currencies",
+    "date": "Interbank rate : ",
     "currencies": {
       "USD": "United States Dollar",
       "AED": "United Arab Emirates Dirham",
