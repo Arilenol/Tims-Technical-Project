@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import currencies from '../models/currencies'
 import { getExchangeRates } from '../services/api/currency'
 import type { DataStored } from '../models/DataStored'
-import type { History } from '../models/TypeHistoric'
+import type { TypeHistory } from '../models/TypeHistory'
 import { useLocation } from 'react-router-dom'
 
 export default function CurrencyConverter() {
@@ -104,7 +104,7 @@ export default function CurrencyConverter() {
   function save(): void {
     const historyStored = localStorage.getItem('history')
 
-    const history: History = historyStored ? JSON.parse(historyStored) : {}
+    const history: TypeHistory = historyStored ? JSON.parse(historyStored) : {}
 
     const id = Date.now().toString()
 

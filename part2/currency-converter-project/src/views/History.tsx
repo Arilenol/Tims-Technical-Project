@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import type { History } from '../models/TypeHistoric'
+import type { TypeHistory } from '../models/TypeHistory'
 import i18n from '../i18n/i18nLoader'
 import '/src/assets/styles/history.css'
 import { Link } from 'react-router-dom'
@@ -8,7 +8,7 @@ import { useState, type Dispatch } from 'react'
 function History() {
   const { t } = useTranslation()
   const historyStored = localStorage.getItem('history')
-  const [history, setHistory]: [History, Dispatch<History>] = useState(historyStored ? JSON.parse(historyStored) : {})
+  const [history, setHistory]: [TypeHistory, Dispatch<TypeHistory>] = useState(historyStored ? JSON.parse(historyStored) : {})
 
 
 

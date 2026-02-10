@@ -13,20 +13,20 @@
     "delete": "Remove this data"
   },
   "about": {
-    "title": "À propos du Currency Converter",
+    "title": "About the Currency Converter",
     "description": {
-      "paragraph1": "Les taux de change sont récupérés depuis une API externe et utilisés pour effectuer les conversions en temps réel. Afin d’améliorer les performances et de limiter les appels réseau, les données sont mises en cache localement pendant une durée définie (30 minutes).",
-      "paragraph2": "L’application prend en charge plusieurs langues grâce au système d’internationalisation (i18n). Les formats de dates et les noms des monnaies s’adaptent automatiquement à la langue sélectionnée.",
-      "paragraph3": "Les conversions effectuées peuvent être enregistrées localement afin de consulter l’historique des opérations précédentes."
+      "paragraph1": "Exchange rates are retrieved from an external API and used to perform real-time conversions. To improve performance and limit network calls, the data is cached locally for a defined period (30 minutes).",
+      "paragraph2": "The application supports multiple languages ​​thanks to the internationalization system (i18n). Date formats and currency names automatically adapt to the selected language.",
+      "paragraph3": "Conversions can be saved locally to view the history of previous transactions."
     },
     "technologies": {
-      "title": "Technologies utilisées",
+      "title": "Technologies used",
       "items": [
-        "React et TypeScript",
-        "React Router pour la navigation",
-        "i18next pour la gestion des langues",
-        "LocalStorage pour la persistance des données",
-        "API de taux de change externe"
+        "React and TypeScript",
+        "React Router for the navigation",
+        "i18next for language management",
+        "LocalStorage for data persistence",
+        "External exchange rate API"
       ]
     }
   },

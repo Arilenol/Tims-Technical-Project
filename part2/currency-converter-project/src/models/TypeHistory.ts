@@ -6,4 +6,4 @@ export interface HistoryItem {
   date: number
 }
 
-export type History = Record<string, HistoryItem>
+export type TypeHistory = Record<string, HistoryItem>
