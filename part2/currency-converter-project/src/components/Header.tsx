@@ -2,12 +2,18 @@ import { Link } from 'react-router-dom'
 import '/src/assets/styles/header.css'
 import { useTranslation } from 'react-i18next'
 
-export default function Header () {
+export default function Header() {
   const { t, i18n } = useTranslation()
 
   const availableLanguages = ['fr', 'en']
 
-  function handleChange (e: React.ChangeEvent<HTMLSelectElement>) {
+  /**
+  * Updates the current langage
+  * 
+  * @param e - The change event from the current langage select element
+  * @returns void
+  */
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>): void {
     i18n.changeLanguage(e.target.value)
   }
 

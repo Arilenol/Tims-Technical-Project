@@ -8,7 +8,9 @@
   },
   "history": {
     "title": "Votre historique",
-    "load": "Charger cette donnée"
+    "clear": "Vider l'historique",
+    "load": "Charger cette donnée",
+    "delete": "Supprimer cette donnée"
   },
   "converter": {
     "amout": "Montant",

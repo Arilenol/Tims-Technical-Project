@@ -7,15 +7,19 @@ import type { DataStored } from '../models/DataStored'
 import type { History } from '../models/TypeHistoric'
 import { useLocation } from 'react-router-dom'
 
-export default function CurrencyConverter () {
+export default function CurrencyConverter() {
   const { t } = useTranslation()
-  const data = currencies
   const location = useLocation()
+  //Fecth all the Code currencies available to convert from currencies.tsx
+  const data: string[] = currencies
+
   const accuracyNumbers: number[] = [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
   const [accuracy, setAccuracy] = useState(0.01)
 
+  //If we are coming from history, this command is used to pre-load the data fields
   const itemPreSave = location.state ? location.state.item : null
 
+  // All the hooks are declared to have their states
   const [codeCurrencyFrom, setCodeCurrencyFrom] = useState(
     itemPreSave ? itemPreSave.codeFrom : data[0]
   )
@@ -28,30 +32,45 @@ export default function CurrencyConverter () {
   const [result, setResult] = useState<number>(
     itemPreSave ? itemPreSave.result : 0
   )
-  function handleChangeBis (e: React.ChangeEvent<HTMLSelectElement>): void {
-    setCodeCurrencyTo(e.target.value)
-  }
-  function handleChange (e: React.ChangeEvent<HTMLSelectElement>): void {
-    setCodeCurrencyFrom(e.target.value)
+
+  /**
+   * Updates the target currency code when the select input changes
+   * 
+   * @param e - The change event from the currency select element
+   * @returns void
+   */
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>): void {
+    if (e.target.id == "inputFrom") {
+      setCodeCurrencyFrom(e.target.value)
+    } else {
+      setCodeCurrencyTo(e.target.value)
+    }
   }
 
   useEffect(() => {
-    async function convert (): Promise<void> {
+    /**
+     * Converts the amount from the source currency to the target currency
+     * Uses stored exchange rates from localStorage when available (valid for 30 min)
+     * 
+     * @throws {Error} If the API call fails to fetch exchange rates
+     */
+    async function convert(): Promise<void> {
       let exchangeRates: DataStored
       const data = localStorage.getItem(codeCurrencyFrom)
-
+      // If the data who gives the exchanges rates from codeCurrencyFrom are not stored, we call the API.
       if (!data) {
-        console.log("j'appelle l'api")
         exchangeRates = await getExchangeRates(codeCurrencyFrom)
       } else {
         exchangeRates = JSON.parse(data)
-
+        // we test if the data stored have a passed date (more than 30 min)
         if (Date.now() > exchangeRates.timestamp) {
           exchangeRates = await getExchangeRates(codeCurrencyFrom)
         }
       }
 
       const rate = exchangeRates.rates[codeCurrencyTo]
+
+      // To have the accuracy asked by the user we need to have the lenght of his selection
       const cleanAccuracy = String(accuracy).replace('.', '').length - 1
       let acc: number = 1
       for (let i = 0; i < cleanAccuracy; i++) {
@@ -63,19 +82,33 @@ export default function CurrencyConverter () {
     convert()
   }, [amount, codeCurrencyFrom, codeCurrencyTo, accuracy])
 
-  function reverseCode () {
+
+  /**
+   * reverse the code Currencies in the converter that's means
+   * the setCodeCurrencyFrom becomes the setCodeCurrencyTo 
+   * and setCodeCurrencyTo becomes the setCodeCurrencyFrom
+   * 
+   * @returns void
+   */
+  function reverseCode(): void {
     const tmp = codeCurrencyFrom
     setCodeCurrencyFrom(codeCurrencyTo)
     setCodeCurrencyTo(tmp)
   }
 
-  function save (): void {
+  /**
+   * Saves the current conversion to the history in localStorage
+   * 
+   * @returns void
+   */
+  function save(): void {
     const historyStored = localStorage.getItem('history')
 
-    let history: History = historyStored ? JSON.parse(historyStored) : {}
+    const history: History = historyStored ? JSON.parse(historyStored) : {}
 
     const id = Date.now().toString()
 
+    // Add the new conversion to history
     history[id] = {
       codeFrom: codeCurrencyFrom,
       codeTo: codeCurrencyTo,
@@ -157,7 +190,7 @@ export default function CurrencyConverter () {
           <select
             id='inputTo'
             value={codeCurrencyTo}
-            onChange={handleChangeBis}
+            onChange={handleChange}
           >
             {data.map(codeCurrency => (
               <option key={codeCurrency} value={codeCurrency}>
