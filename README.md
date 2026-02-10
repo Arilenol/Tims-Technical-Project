@@ -1,3 +1,58 @@
+# Currency Converter
+
+Live demo: https://arilenol.github.io/Tims-Technical-Project/
+
+## Overview
+
+This is a small currency converter web application built with React and TypeScript. It fetches exchange rates from an external API to perform real-time conversions, caches rates locally to reduce network calls (cached for 30 minutes), supports multiple languages via i18next, and saves conversion history in LocalStorage.
+
+## Features
+
+- Real-time currency conversion using an external rates API
+- Local caching of rates (30 minute expiry) to improve performance
+- Multi-language support (i18n) — currency names and dates adapt to the active locale
+- Save and view conversion history (stored in LocalStorage)
+
+## Technologies
+
+- React
+- TypeScript
+- Vite
+- React Router
+- i18next
+- LocalStorage
+
+## Quick Start
+
+Open a terminal and run:
+
+```bash
+cd part2/currency-converter-project/
+npm install
+npm run dev
+```
+
+To create a production build and preview it locally:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Project structure (important folders)
+
+- `src/assets/styles` - styles for components
+- `src/components` - main UI components
+- `src/services/api` - API and caching logic (rates fetch)
+- `src/i18n` - internationalization setup and translation files
+- `public` - static assets and demo-friendly files
+
+## Configuration
+
+- API: The app uses a public exchange rates API (see `src/services/api/currency.ts`). If you need to change the provider or add an API key, update the service file.
+- Locale: Languages live under `src/i18n/locales/` — add or modify translations there.
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
