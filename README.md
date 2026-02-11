@@ -4,7 +4,7 @@ Live demo: https://arilenol.github.io/Tims-Technical-Project/
 
 ## Overview
 
-This is a small currency converter web application built with React and TypeScript. It fetches exchange rates from an external API to perform real-time conversions, caches rates locally to reduce network calls (cached for 30 minutes), supports multiple languages via i18next, and saves conversion history in LocalStorage.
+This is a small currency converter web application responsive built with React and TypeScript. It fetches exchange rates from an external API ,called [ExchangeRate-API](https://www.exchangerate-api.com), to perform real-time conversions, caches rates locally to reduce network calls (cached for 30 minutes), supports multiple languages via i18next, and saves conversion history in LocalStorage.
 
 ## Features
 
@@ -12,6 +12,7 @@ This is a small currency converter web application built with React and TypeScri
 - Local caching of rates (30 minute expiry) to improve performance
 - Multi-language support (i18n) — currency names and dates adapt to the active locale
 - Save and view conversion history (stored in LocalStorage)
+- The site is also adapted for all screen types (responsive).
 
 ## Technologies
 

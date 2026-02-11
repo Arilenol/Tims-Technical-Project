@@ -21,7 +21,8 @@
     "description": {
       "paragraph1": "Les taux de change sont récupérés depuis une API externe et utilisés pour effectuer les conversions en temps réel. Afin d’améliorer les performances et de limiter les appels réseau, les données sont mises en cache localement pendant une durée définie (30 minutes).",
       "paragraph2": "L’application prend en charge plusieurs langues grâce au système d’internationalisation (i18n). Les formats de dates et les noms des monnaies s’adaptent automatiquement à la langue sélectionnée.",
-      "paragraph3": "Les conversions effectuées peuvent être enregistrées localement afin de consulter l’historique des opérations précédentes."
+      "paragraph3": "Les conversions effectuées peuvent être enregistrées localement afin de consulter l’historique des opérations précédentes.",
+      "paragraph4": "Le site est également adapté pour tous les types d'écran (responsive)"
     },
     "technologies": {
       "title": "Technologies utilisées",
@@ -30,7 +31,7 @@
         "React Router pour la navigation",
         "i18next pour la gestion des langues",
         "LocalStorage pour la persistance des données",
-        "API de taux de change externe"
+        "API de taux de change externe appelé : "
       ]
     }
   },
@@ -42,7 +43,7 @@
     "saveConvert": "Sauvegarder mes choix de conversion",
     "accuracy": "Précision de la conversion au maximum",
     "reverse": "inverser les monnaies",
-    "date": "Taux interbancaire : ",
+    "date": "Taux de change : ",
     "currencies": {
       "USD": "Dollar américain",
       "AED": "Dirham des Émirats arabes unis",

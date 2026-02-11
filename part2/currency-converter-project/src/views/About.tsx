@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
 function About() {
   const { t } = useTranslation()
@@ -14,6 +15,9 @@ function About() {
       <p>
         {t("about.description.paragraph3")}
       </p>
+      <p>
+        {t("about.description.paragraph4")}
+      </p>
 
       <h3>{t("about.technologies.title")}</h3>
 
@@ -22,7 +26,7 @@ function About() {
         <li>{t("about.technologies.items.1")}</li>
         <li>{t("about.technologies.items.2")}</li>
         <li>{t("about.technologies.items.3")}</li>
-        <li>{t("about.technologies.items.4")}</li>
+        <li>{t("about.technologies.items.4")} <Link to="https://www.exchangerate-api.com">ExchangeRate API</Link></li>
       </ul>
     </section>
 

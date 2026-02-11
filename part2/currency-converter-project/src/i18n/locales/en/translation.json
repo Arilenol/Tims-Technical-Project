@@ -21,7 +21,8 @@
     "description": {
       "paragraph1": "Exchange rates are retrieved from an external API and used to perform real-time conversions. To improve performance and limit network calls, the data is cached locally for a defined period (30 minutes).",
       "paragraph2": "The application supports multiple languages ​​thanks to the internationalization system (i18n). Date formats and currency names automatically adapt to the selected language.",
-      "paragraph3": "Conversions can be saved locally to view the history of previous transactions."
+      "paragraph3": "Conversions can be saved locally to view the history of previous transactions.",
+      "paragraph4": "The site is also adapted for all screen types (responsive)."
     },
     "technologies": {
       "title": "Technologies used",
@@ -30,7 +31,7 @@
         "React Router for the navigation",
         "i18next for language management",
         "LocalStorage for data persistence",
-        "External exchange rate API"
+        "External exchange rate API called : "
       ]
     }
   },
@@ -42,7 +43,7 @@
     "saveConvert": "Save my conversion choices",
     "accuracy": "Max conversion accuracy",
     "reverse": "reverse the currencies",
-    "date": "Interbank rate : ",
+    "date": "Exchange rate : ",
     "currencies": {
       "USD": "United States Dollar",
       "AED": "United Arab Emirates Dirham",
